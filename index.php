@@ -1,10 +1,10 @@
 <?php
-require "php_config/init.php"
+require "php_config/init.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php require "htmlElements/head_config.php" ?>
+    <?php require "htmlElements/head_config.php"; ?>
 </head>
 <body>
     <?php
@@ -37,3 +37,5 @@ require "php_config/init.php"
     ?>
 </body>
 </html>
+<?php
+ob_end_flush();
