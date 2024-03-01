@@ -33,7 +33,7 @@ require "php_config/init.php";
 
     include $section;// On execute le code de la section demmandée et vérifiée
 
-    include "./htmlElements/footer.php";// Le contenu HTML du footer (bas de la page html)
+    include "./htmlElements/footer.php";// Le contenu HTML du footer (bas de la page html) 
     ?>
 </body>
 </html>
