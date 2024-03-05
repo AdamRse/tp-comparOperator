@@ -1,9 +1,9 @@
 <?php 
 
 class Review {
-    private int $id;
-    private string $message;
-    private string $author;
+    private int $_id;
+    private string $_message;
+    private string $_author;
 
 // CONSTRUCT
     public function __construct (array $data) 
@@ -25,33 +25,33 @@ class Review {
 // SETTER 
     public function setId (int $id)
     {
-        $this->id = $id;
+        $this->_id = $id;
     }
 
     public function setMessage (string $message)
     {
-        $this->message = $message;
+        $this->_message = $message;
     }
 
     public function setAuthor (string $author)
     {
-        $this->author = $author;
+        $this->_author = $author;
     }
 
 // GETTER
     public function getId() 
     {
-        return $this->id;
+        return $this->_id;
     }
 
     public function getMessage() 
     {
-        return $this->message;
+        return $this->_message;
     }
 
     public function getAuthor() 
     {
-        return $this->author;
+        return $this->_author;
     }
 
 }
