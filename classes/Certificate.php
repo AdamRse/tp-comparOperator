@@ -1,8 +1,8 @@
 <?php 
 
 class Certificate {
-    private string $expiresAt;
-    private string $signatory;
+    private string $_expiresAt;
+    private string $_signatory;
 
 // CONSTRUCT
     public function __construct (array $data) 
@@ -24,23 +24,23 @@ class Certificate {
 // SETTER 
     public function setExpiresAt (string $expiresAt)
     {
-        $this->expiresAt = $expiresAt;
+        $this->_expiresAt = $expiresAt;
     }
 
     public function setSignatory (string $signatory)
     {
-        $this->signatory = $signatory;
+        $this->_signatory = $signatory;
     }
 
 // GETTER
     public function getExpiresAt() 
     {
-        return $this->expiresAt;
+        return $this->_expiresAt;
     }
 
     public function getSignatory() 
     {
-        return $this->signatory;
+        return $this->_signatory;
     }
 
 

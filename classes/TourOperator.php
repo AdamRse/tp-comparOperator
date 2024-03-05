@@ -1,13 +1,13 @@
 <?php 
 
 class TourOperator {
-    private int $id;
-    private string $name;
-    private string $link;
-    private Certificate $certificate; 
-    private array $destinations = [];
-    private array $reviews = [];
-    private array $scores = [];
+    private int $_id;
+    private string $_name;
+    private string $_link;
+    private Certificate $_certificate; 
+    private array $_destinations = [];
+    private array $_reviews = [];
+    private array $_scores = [];
 
 // CONSTRUCT
     public function __construct (array $data) 
@@ -29,73 +29,73 @@ class TourOperator {
 // SETTER 
     public function setId (int $id)
     {
-        $this->id = $id;
+        $this->_id = $id;
     }
 
     public function setName (string $name)
     {
-        $this->name = $name;
+        $this->_name = $name;
     }
 
     public function setLink (string $link)
     {
-        $this->link = $link;
+        $this->_link = $link;
     }
 
     public function setCertificate (Certificate $certificate)
     {
-        $this->certificate = $certificate;
+        $this->_certificate = $certificate;
     }
 
     public function setDestinations (array $destinations)
     {
-        $this->destinations = $destinations;
+        $this->_destinations = $destinations;
     }
 
     public function setReviews (array $reviews)
     {
-        $this->reviews = $reviews;
+        $this->_reviews = $reviews;
     }
 
     public function setScores (array $scores)
     {
-        $this->scores = $scores;
+        $this->_scores = $scores;
     }
 
 // GETTER
     public function getId() 
     {
-        return $this->id;
+        return $this->_id;
     }
 
     public function getName() 
     {
-        return $this->name;
+        return $this->_name;
     }
 
     public function getLink() 
     {
-        return $this->link;
+        return $this->_link;
     }
 
     public function getCertificate() 
     {
-        return $this->certificate;
+        return $this->_certificate;
     }
 
     public function getDestinations() 
     {
-        return $this->destinations;
+        return $this->_destinations;
     }
 
     public function getReviews() 
     {
-        return $this->reviews;
+        return $this->_reviews;
     }
 
     public function getScores() 
     {
-        return $this->scores;
+        return $this->_scores;
     }
         
 

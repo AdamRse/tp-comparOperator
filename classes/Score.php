@@ -1,9 +1,9 @@
 <?php 
 
 class Score {
-    private int $id;
-    private int $value;
-    private string $author;
+    private int $_id;
+    private int $_value;
+    private string $_author;
 
 // CONSTRUCT
     public function __construct (array $data) 
@@ -13,10 +13,10 @@ class Score {
 
 // METHOD 
     public function hydrate(array $data){
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $_value) {
             $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
             if (method_exists($this, $method)) {
-                $this->$method($value);
+                $this->$method($_value);
             }
         }
     }
@@ -25,33 +25,33 @@ class Score {
 // SETTER 
     public function setId (int $id)
     {
-        $this->id = $id;
+        $this->_id = $id;
     }
 
     public function setValue (int $value)
     {
-        $this->value = $value;
+        $this->_value = $value;
     }
 
     public function setAuthor (string $author)
     {
-        $this->author = $author;
+        $this->_author = $author;
     }
 
 // GETTER
     public function getId() 
     {
-        return $this->id;
+        return $this->_id;
     }
 
     public function getValue() 
     {
-        return $this->value;
+        return $this->_value;
     }
 
     public function getAuthor() 
     {
-        return $this->author;
+        return $this->_author;
     }
 
 }

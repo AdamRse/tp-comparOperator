@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ComparoSpace</title>
-
+<link rel="stylesheet" href="/styles/style.css">
 <?php
 
     if($page === "index"){ ?>
