@@ -12,15 +12,13 @@ class Manager {
 // GETTER ALL
     public function getAllDestination() 
     {
-        $preparedrequest = $this->_db->prepare("SELECT * FROM `destination`");
-        $preparedrequest->execute();
+        $preparedrequest = $this->_db->query("SELECT * FROM `destination`");
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllOperator() 
     {
-        $preparedrequest = $this->_db->prepare("SELECT * FROM `tour_operator`");
-        $preparedrequest->execute();
+        $preparedrequest = $this->_db->query("SELECT * FROM `tour_operator`");
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
 

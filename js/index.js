@@ -39,7 +39,6 @@ const mars = planete(2, "/js/threejs/resources/Gaseous1.png", 30)
 const earth = planete(1, "/js/threejs/resources/Gaseous1.png", 50)
 const coruscant = planete(3, "/js/threejs/resources/Gaseous1.png", 60)
 
-
 init();
 animate();
 function resizeRendererToDisplaySize(renderer) {
@@ -53,12 +52,10 @@ function resizeRendererToDisplaySize(renderer) {
     return needResize;
 }
 function init() {
-
     camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100 );
    
     camera.lookAt( 0, 0, 1 );
     camera.position.set(6, 8, 30);
-    
 
     const light = new THREE.HemisphereLight( 0xffffff, 0x888888, 3 );
     light.position.set( 0, 1, 0 );
@@ -128,7 +125,6 @@ function animate() {
   earth.obj.rotateY(0.01)
   mars.obj.rotateY(0.05)
   coruscant.obj.rotateY(0.03)
-   
 
     controls.update();
 
