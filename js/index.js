@@ -18,11 +18,9 @@ import { Star } from '/js/threejs/objects/star.js';
 let canvas, renderer, camera, scene, orbit, baseComposer, bloomComposer, overlayComposer
 
 
-const btn = document.querySelector(".btn")
+
 
 // test click object var
-const raycaster = new THREE.Raycaster()
-const mouse = new THREE.Vector2()
 
 
 
@@ -37,19 +35,19 @@ function initThree() {
     scene.fog = new THREE.FogExp2(0xEBE2DB, 0.00003);
 
     // camera
-    camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 5000000 );
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
     camera.position.set(0, 500, 500);
     camera.up.set(0, 0, 1);
     camera.lookAt(0, 0, 0);
 
     // map orbit
-    orbit = new OrbitControls(camera, canvas)
-    orbit.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-    orbit.dampingFactor = 0.05;
-    orbit.screenSpacePanning = false;
-    orbit.minDistance = 1;
-    orbit.maxDistance = 16384;
-    orbit.maxPolarAngle = (Math.PI / 2) - (Math.PI / 360)
+   // orbit = new OrbitControls(camera, canvas)
+    //orbit.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    //orbit.dampingFactor = 0.05;
+    //orbit.screenSpacePanning = false;
+   // orbit.minDistance = 1;
+   // orbit.maxDistance = 16384;
+    //orbit.maxPolarAngle = (Math.PI / 2) - (Math.PI / 360)
 
     initRenderPipeline()
 
@@ -64,7 +62,7 @@ function initRenderPipeline() {
         logarithmicDepthBuffer: true,
     })
     renderer.setPixelRatio( window.devicePixelRatio )
-    renderer.setSize( 1000, 700 )
+    renderer.setSize( 500, 500 )
     renderer.outputEncoding = THREE.sRGBEncoding
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = 0.5
@@ -123,7 +121,7 @@ function resizeRendererToDisplaySize(renderer) {
 
 async function render() {
 
-    orbit.update()
+    //orbit.update()
 
     // fix buffer size
     if (resizeRendererToDisplaySize(renderer)) {
@@ -172,34 +170,38 @@ requestAnimationFrame(render)
 
 
 
+const raycaster= new THREE.Raycaster();
 
 const pointer = new THREE.Vector2();
 
-//https://threejs-journey.com/lessons/raycaster-and-mouse-events#cast-a-ray
+const geometry = new THREE.PlaneGeometry( 600, 700 );
+const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+const plane = new THREE.Mesh( geometry, material );
+plane.name="plane"
+scene.add( plane );
 
-const geometry = new THREE.SphereGeometry( 15, 32, 16 ); 
-const map = new THREE.TextureLoader().load( 'resources/Gaseous1.png' );
-const material = new THREE.MeshBasicMaterial( {map:map } ); 
+    window.addEventListener("click", function(e){
 
-const sphere = new THREE.Mesh( geometry, material );
-sphere.name ="sphere"
- sphere.position.x = 150
- console.log(sphere)
-scene.add( sphere );
-
-window.addEventListener("click", function(e){
-    pointer.x = ( e.clientX / window.innerWidth ) ;
-	pointer.y = - ( e.clientY / window.innerHeight ) ;
+   
+   pointer.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+	pointer.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
     raycaster.setFromCamera( pointer, camera );
     const intersects = raycaster.intersectObjects( scene.children );
 
-    console.log(intersects)
+	for ( let i = 0; i < intersects.length; i ++ ) {
+        if(intersects[i].object.name ==="plane"){
+            console.log("ok")
+        }
+		
+
+	}
+    console.log(intersects);
 })
+
 function planet(){
-    const geometry = new THREE.SphereGeometry( 15, 32, 16 ); 
-    const map = new THREE.TextureLoader().load( 'resources/Gaseous1.png' );
-    const material = new THREE.MeshBasicMaterial( {map:map } ); 
-    
+    const geometry = new THREE.SphereGeometry( 30, 64, 32 ); 
+    const map = new THREE.TextureLoader().load( '/js/treejs/resources/Gaseous1.png' );
+    const material = new THREE.MeshBasicMaterial( {map:map, side:THREE.DoubleSide } ); 
     const sphere = new THREE.Mesh( geometry, material );
     sphere.name ="sphere"
      sphere.position.x = 150
@@ -207,3 +209,63 @@ function planet(){
     scene.add( sphere );
 
 }
+
+
+
+/*
+canvas = document.querySelector('#canvas');
+
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    canvas,
+    logarithmicDepthBuffer: true,
+})
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const cube = new THREE.Mesh( geometry, material );
+scene.add( cube );
+
+camera.position.z = 5;
+const geometry2 = new THREE.SphereGeometry( 2, 1, 1 ); 
+const map = new THREE.TextureLoader().load( '/js/threejs/resources/Gaseous1.png' );
+const material2 = new THREE.MeshBasicMaterial( {map:map, side:THREE.DoubleSide } ); 
+const sphere = new THREE.Mesh( geometry2, material2 );
+sphere.name ="sphere"
+
+ scene.add(sphere)
+window.addEventListener("click", function(e){
+
+	pointer.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+	pointer.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+    raycaster.setFromCamera( pointer, camera );
+    const intersects = raycaster.intersectObjects( scene.children);
+    console.log(scene.children)
+    for ( let i = 0; i < intersects.length; i ++ ) {
+        if(intersects[i].object.name ==="sphere"){
+            intersects[ i ].object.position.x += 1
+        }
+		
+
+	}
+})
+
+
+function animate() {
+	requestAnimationFrame( animate );
+    
+	
+
+	renderer.render( scene, camera );
+   
+}
+
+animate();
+*/
