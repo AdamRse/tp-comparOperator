@@ -1,37 +1,37 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+    <nav class="navbar bg-space-primary container border-bottom border-light">
+    <a class="navbar-brand text-space-primary-reverse fw-bold" href="/">
+        <img src="/images/normandy.png" class="w-25" />
+        SPACE OPERATOR
+    </a>
+    <div class="text-space-primary-reverse fw-bold position-relative">
+        <?php
+        if(AUTHOR){
+            echo $_SESSION['user']['author']['name'];
+            ?>
+            <i class="fa-solid fa-user-astronaut fa-lg text-space-primary-reverse ms-2"></i>
+            <?php
+        }
+        elseif(TO){
+            echo $_SESSION['user']['to']['name'];
+            ?>
+            <i class="fa-solid fa-user-tie fa-lg text-space-primary-reverse ms-2"></i>
+            <?php
+        }
+        else{
+            ?>
+            Guest
+            <i class="fa-regular fa-user fa-lg text-space-primary-reverse ms-2"></i>
+            <div class="border border-light p-2 mt-3 position-absolute bg-space-primary rounded-2 top-100 end-0 " style="min-width: 300px">
+                <div class="">
+                    <input type="text" placeholder="Name" class="w-100 p-1 m-1 rounded-2 text-space-primary-reverse bg-space-primary" />
+                    <input type="password" placeholder="Password" class="w-100 py-1 m-1 rounded-2 text-space-primary-reverse bg-space-primary" />
+                    <button id="btConnect" class="btn my-2 text-space-primary-reverse bg-space-secondary text-secondary-reverse m-1 ">Connect to your destiny !</button>
+                </div>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+            <?php
+        }
+        ?>
     </div>
     </nav>
 </header>

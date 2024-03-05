@@ -41,13 +41,13 @@ function initThree() {
     camera.lookAt(0, 0, 0);
 
     // map orbit
-   // orbit = new OrbitControls(camera, canvas)
-    //orbit.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-    //orbit.dampingFactor = 0.05;
-    //orbit.screenSpacePanning = false;
-   // orbit.minDistance = 1;
-   // orbit.maxDistance = 16384;
-    //orbit.maxPolarAngle = (Math.PI / 2) - (Math.PI / 360)
+   orbit = new OrbitControls(camera, canvas)
+    orbit.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    orbit.dampingFactor = 0.05;
+    orbit.screenSpacePanning = false;
+   orbit.minDistance = 1;
+   orbit.maxDistance = 16384;
+    orbit.maxPolarAngle = (Math.PI / 2) - (Math.PI / 360)
 
     initRenderPipeline()
 
@@ -121,7 +121,7 @@ function resizeRendererToDisplaySize(renderer) {
 
 async function render() {
 
-    //orbit.update()
+    orbit.update()
 
     // fix buffer size
     if (resizeRendererToDisplaySize(renderer)) {
@@ -174,29 +174,6 @@ const raycaster= new THREE.Raycaster();
 
 const pointer = new THREE.Vector2();
 
-const geometry = new THREE.PlaneGeometry( 600, 700 );
-const material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-const plane = new THREE.Mesh( geometry, material );
-plane.name="plane"
-scene.add( plane );
-
-    window.addEventListener("click", function(e){
-
-   
-   pointer.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-	pointer.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
-    raycaster.setFromCamera( pointer, camera );
-    const intersects = raycaster.intersectObjects( scene.children );
-
-	for ( let i = 0; i < intersects.length; i ++ ) {
-        if(intersects[i].object.name ==="plane"){
-            console.log("ok")
-        }
-		
-
-	}
-    console.log(intersects);
-})
 
 function planet(){
     const geometry = new THREE.SphereGeometry( 30, 64, 32 ); 

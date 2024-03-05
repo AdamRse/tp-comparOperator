@@ -6,14 +6,12 @@ require "php_config/init.php";
 <head>
     <?php require "htmlElements/head_config.php"; ?>
 </head>
-<body>
+<body class="bg-dark text-light min-vh-100">
     <?php
     // echo "///<pre>";
     // var_dump($_SESSION, $_GET);
     // echo "</pre>///";
     include "./htmlElements/header.php";// Le contenu HTML du header (haut de la page html)
-
-    
 
     include $section;// On execute le code de la section demmandée et vérifiée
 
