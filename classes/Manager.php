@@ -83,4 +83,25 @@ class Manager {
             } else 
                 return false; 
     }
+
+    // USERS
+    public function getAuthorConnect($name, $pw)
+    {
+        $query = $this->_db->prepare("SELECT * FROM author WHERE name = ?");
+        $query->execute([$name]);
+        $author = $query->fetch(PDO::FETCH_ASSOC);
+        if(!empty($author) && !password_verify($pw, $author['password']))
+            $author = false;
+        return $author;
+
+    }
+    public function getTourOperatorConnect($name, $pw)
+    {
+        $query = $this->_db->prepare("SELECT * FROM tour_operator WHERE name = ?");
+        $query->execute([$name]);
+        $tourOperator = $query->fetch(PDO::FETCH_ASSOC);
+        if(!empty($tourOperator) && !password_verify($pw, $tourOperator['password']))
+            $tourOperator = false;
+        return $tourOperator;
+    }
 }

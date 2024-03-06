@@ -1,10 +1,10 @@
 <header>
     <nav class="navbar bg-space-primary container border-bottom border-light">
     <a class="navbar-brand text-space-primary-reverse fw-bold" href="/">
-        <img src="/images/normandy.png" class="w-25" />
+        <img src="/images/normandy.png" class="m-1 ms-5" style="max-height: 25px;" />
         SPACE OPERATOR
     </a>
-    <div class="text-space-primary-reverse fw-bold position-relative">
+    <div id="openConnect" class="text-space-primary-reverse fw-bold position-relative py-3 ps-3 me-5" style="cursor: pointer">
         <?php
         if(AUTHOR){
             echo $_SESSION['user']['author']['name'];
@@ -21,13 +21,13 @@
         else{
             ?>
             Guest
-            <i class="fa-regular fa-user fa-lg text-space-primary-reverse ms-2"></i>
+            <i class="fa-regular fa-user fa-lg text-space-primary-reverse ms-2 rounded-circle border-1 border-space-primary-reverse"></i>
             <div class="border border-light p-2 mt-3 position-absolute bg-space-primary rounded-2 top-100 end-0 " style="min-width: 300px">
-                <div class="">
+                <form id="formCOnnect" class="">
                     <input type="text" placeholder="Name" class="w-100 p-1 m-1 rounded-2 text-space-primary-reverse bg-space-primary" />
                     <input type="password" placeholder="Password" class="w-100 py-1 m-1 rounded-2 text-space-primary-reverse bg-space-primary" />
                     <button id="btConnect" class="btn my-2 text-space-primary-reverse bg-space-secondary text-secondary-reverse m-1 ">Connect to your destiny !</button>
-                </div>
+                </form>
             </div>
             <?php
         }

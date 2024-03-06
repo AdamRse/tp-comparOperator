@@ -4,8 +4,9 @@ import { getFirstObjectWithName } from '/js/threejs/RayCastHelper.js';
 import { CompositionShader } from '/js/threejs/shaders/CompositionShader.js'
 import { BASE_LAYER, BLOOM_LAYER, BLOOM_PARAMS, OVERLAY_LAYER } from "/js/threejs/config/renderConfig.js";
 
-// Rendering
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// // Rendering
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -15,6 +16,8 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { Galaxy } from '/js/threejs/objects/galaxy.js';
 import { Star } from '/js/threejs/objects/star.js';
 
+
+// let canvas, renderer, camera, scene, orbit, baseComposer, bloomComposer, overlayComposer
 
 let trigger = false
 let camera, scene, renderer, controls, stats;
