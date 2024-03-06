@@ -1,20 +1,21 @@
-import * as THREE from 'three'
-import { getFirstObjectWithName } from '/js/threejs/RayCastHelper.js';
-// Data and visualization
-import { CompositionShader} from '/js/threejs/shaders/CompositionShader.js'
-import { BASE_LAYER, BLOOM_LAYER, BLOOM_PARAMS, OVERLAY_LAYER } from "/js/threejs/config/renderConfig.js";
+// import * as THREE from 'three'
+// import { getFirstObjectWithName } from '/js/threejs/RayCastHelper.js';
+// // Data and visualization
+// import { CompositionShader} from '/js/threejs/shaders/CompositionShader.js'
+// import { BASE_LAYER, BLOOM_LAYER, BLOOM_PARAMS, OVERLAY_LAYER } from "/js/threejs/config/renderConfig.js";
 
-// Rendering
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// // Rendering
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+// import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+// import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+// import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { Galaxy } from '/js/threejs/objects/galaxy.js';
-import { Star } from '/js/threejs/objects/star.js';
+// import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+// import { Galaxy } from '/js/threejs/objects/galaxy.js';
+// import { Star } from '/js/threejs/objects/star.js';
 
+// let canvas, renderer, camera, scene, orbit, baseComposer, bloomComposer, overlayComposer
 
 
 
@@ -117,6 +118,31 @@ function onMouseMove( event ) {
 
     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+// initThree()
+// let axes = new THREE.AxesHelper(5.0)
+// scene.add(axes)
+
+// let galaxy = new Galaxy(scene)
+
+// requestAnimationFrame(render)
+
+
+
+// const raycaster= new THREE.Raycaster();
+
+// const pointer = new THREE.Vector2();
+
+
+function planet(){
+    const geometry = new THREE.SphereGeometry( 30, 64, 32 ); 
+    const map = new THREE.TextureLoader().load( '/js/treejs/resources/Gaseous1.png' );
+    const material = new THREE.MeshBasicMaterial( {map:map, side:THREE.DoubleSide } ); 
+    const sphere = new THREE.Mesh( geometry, material );
+    sphere.name ="sphere"
+     sphere.position.x = 150
+     console.log(sphere)
+    scene.add( sphere );
 
 }
 

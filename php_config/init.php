@@ -11,7 +11,6 @@ ini_set("error_append_string ", "</pre>");
 //requires
 require "db.php";
 require "autoload.php";
-require "connect.php"; //Require db.php et autoload.php
 require "const.php";
 require "fct.php";
 require "calcul_page.php";

@@ -1,4 +1,4 @@
-<footer class="py-3 mt-3 d-flex justify-content-between border-top border-light" style="box-shadow: 0 -5px 5px #000;">
+<footer class="py-3 mt-3 d-flex justify-content-between border-top border-space-primary-reverse text-space-primary-reverse bg-space-primary" style="box-shadow: 0 -5px 5px #000;">
 <div class="col-sm-6 text-end">
     <img src="/images/normandy.png" />
 </div>

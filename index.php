@@ -6,7 +6,7 @@ require "php_config/init.php";
 <head>
     <?php require "htmlElements/head_config.php"; ?>
 </head>
-<body class="bg-dark text-light min-vh-100">
+<body class="bg-dark text-light min-vh-100 user-select-none">
     <?php
     // echo "///<pre>";
     // var_dump($_SESSION, $_GET);
