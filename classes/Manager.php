@@ -18,8 +18,8 @@ class Manager {
 
     public function getAllOperator() 
     {
-        $preparedrequest = $this->_db->query("SELECT * FROM `tour_operator`");
-        $bddOperators = $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
+        $request = $this->_db->query("SELECT * FROM `tour_operator`");
+        $bddOperators = $request->fetchAll(PDO::FETCH_ASSOC);
         $objOperators = [];
         foreach ($bddOperators as $line){
             $to = new TourOperator($line);
@@ -33,8 +33,20 @@ class Manager {
     }
     public function getAllPlanets()
     {
-        $preparedrequest = $this->_db->query("SELECT * FROM planet;");
-        return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
+        $request = $this->_db->query("SELECT * FROM planet;");
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getAllAuthors()
+    {
+        $request = $this->_db->query("SELECT * FROM `author`");
+        $bddAuthors = $request->fetchAll(PDO::FETCH_ASSOC);
+        $objAuthors = [];
+        foreach($bddAuthors as $author){
+            $objAuthor = new Author($author);
+            $objAuthor->setReviews($this->getReviewByAuthor($author['id']));
+            $objAuthors[] = $objAuthor;
+        }
+        return $objAuthors;
     }
 
 // GETTER BY ID
@@ -61,6 +73,18 @@ class Manager {
     {
         $preparedrequest = $this->_db->prepare("SELECT r.id, r.message, a.name as author FROM `review` r LEFT JOIN author a ON r.author_id = a.id WHERE r.tour_operator_id = ?");
         $preparedrequest->execute([$tour_operator_id]);
+        $bddReviews = $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
+        $objReviews = [];
+        foreach ($bddReviews as $review) {
+            $objReviews[] = new Review($review);
+        }
+        return $objReviews;
+    }
+
+    public function getReviewByAuthor(int $author_id) 
+    {
+        $preparedrequest = $this->_db->prepare("SELECT r.id, r.message, t.name as tourOperator FROM `review` r LEFT JOIN tour_operator t ON r.tour_operator = t.id WHERE r.author = ?");
+        $preparedrequest->execute([$author_id]);
         $bddReviews = $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
         $objReviews = [];
         foreach ($bddReviews as $review) {
