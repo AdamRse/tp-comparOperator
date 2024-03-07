@@ -45,6 +45,9 @@ else{
                 </div>
                 <div id="divMenuTo" class="d-none">
                     Menu TO
+                    <div class="my-3">
+                        <a href="?s=manage_to">Management</a>
+                    </div>
                     <div id="divLogoutTo" class="divLogout"  style="cursor: pointer">Log out</div>
                 </div>
                 <div id="divMenuAdmin" class="d-none">

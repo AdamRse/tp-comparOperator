@@ -5,9 +5,10 @@ class Certificate {
     private string $_signatory;
 
 // CONSTRUCT
-    public function __construct (array $data) 
+    public function __construct ($data = []) 
     {
-        $this->hydrate($data);
+        if(!empty($data) && is_array($data))
+            $this->hydrate($data);
     }
 
 // METHOD 

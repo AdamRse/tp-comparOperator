@@ -1,16 +1,18 @@
 <?php
 $manager = new Manager($connexion);
 $operators = $manager->getAllOperator();
-echo "<pre>";
-//var_dump($operators);
-echo "</pre>";
+// echo "<pre>";
+// var_dump($operators);
+// echo "</pre>";
 ?>
-<h2 class="text-center">Gérer les tour operator du site</h2>
+<h2 class="text-center">Manage Tour Operators</h2>
 <table class="table" id="tableTourOperators">
 <thead>
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Commercial Link</th>
+      <th scope="col">Reviews</th>
+      <th scope="col">Scores</th>
       <th scope="col">Options</th>
     </tr>
     <?php
@@ -24,6 +26,12 @@ echo "</pre>";
                 <a href='<?= $operator->getLink() ?>'><?= $operator->getLink() ?></a>
             </td>
             <td class="bg-space-primary text-space-primary-reverse">
+                <?= sizeof($operator->getReviews()) ?>
+            </td>
+            <td class="bg-space-primary text-space-primary-reverse">
+                <?= sizeof($operator->getScores()) ?>
+            </td>
+            <td class="bg-space-primary text-space-primary-reverse">
                 <button data-id="<?= $operator->getId() ?>" data-name="<?= $operator->getName() ?>" class="deleteTo btn btn-danger">Delete</button>
             </td>
         </tr>
@@ -32,11 +40,11 @@ echo "</pre>";
     ?>
 </thead>
 </table>
-<h2 class="text-center mt-4">Ajouter un tour operator</h2>
+<h2 class="text-center mt-4">Add a tour Operator</h2>
 <div class="d-flex justify-content-center">
-    <form method="get" class="col-lg-6 col-11">
+    <form method="get" class="col-lg-4 col-sm-8 col-11">
         <input type="hidden" name="s" value="admin"/>
-        <input type="process" name="s" value="addOperator"/>
+        <input type="hidden" name="process" value="addOperator"/>
         <div class="form-group mb-3">
             <label for="inputAddOpName">Name</label>
             <input type="text" name="name" class="form-control text-center" id="inputAddOpName" placeholder="Enter Name">
