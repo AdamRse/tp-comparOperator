@@ -5,7 +5,10 @@ if(ADMIN){
     }
     else{
         require "actions/menu.php";
-        require "actions/crud.php";
+        if(empty($_GET['vue']) || $_GET['vue'] == "to")
+            require "actions/crudTo.php";
+        else
+            require "actions/crudAuthor.php";
     }
 }
 else
