@@ -32,9 +32,11 @@ else
                 </form>
                 <div id="divMenuAuthor" class="d-none">
                     Menu Author
+                    <div id="divLogoutAuthor" style="cursor: pointer">Log out</div>
                 </div>
                 <div id="divMenuTo" class="d-none">
                     Menu TO
+                    <div id="divLogoutTo" style="cursor: pointer">Log out</div>
                 </div>
             </div>
         </div>
