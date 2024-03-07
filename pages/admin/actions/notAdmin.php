@@ -1,0 +1,1 @@
+<h1 class="text-center text-danger">Petit conquinou tu n'es pas admin</h1>

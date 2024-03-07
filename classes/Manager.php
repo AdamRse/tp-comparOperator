@@ -12,14 +12,19 @@ class Manager {
 // GETTER ALL
     public function getAllDestination() 
     {
-        $preparedrequest = $this->_db->query("SELECT d.*, p.name, p.description, p.image FROM `destination` d LEFT JOIN planet p ON d.planet_id = p.id;");
+        $preparedrequest = $this->_db->query("SELECT d.*, p.name, p.description, p.image, t.name as name_to, t.link, t.logo as logo_to FROM `destination` d LEFT JOIN planet p ON d.planet_id = p.id LEFT JOIN tour_operator t ON d.tour_operator_id = t.id;");
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllOperator() 
     {
         $preparedrequest = $this->_db->query("SELECT * FROM `tour_operator`");
-        return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
+        $bddOperators = $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
+        $objOperators = [];
+        foreach ($bddOperators as $line){
+            $objOperators[] = new TourOperator($line);
+        }
+        return $objOperators;
     }
     public function getAllPlanets()
     {
