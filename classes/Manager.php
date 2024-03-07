@@ -109,4 +109,13 @@ class Manager {
             $tourOperator = false;
         return $tourOperator;
     }
+    public function getAdminConnect($name, $pw)
+    {
+        $query = $this->_db->prepare("SELECT * FROM admin WHERE name = ?");
+        $query->execute([$name]);
+        $tourOperator = $query->fetch(PDO::FETCH_ASSOC);
+        if(!empty($tourOperator) && !password_verify($pw, $tourOperator['password']))
+            $tourOperator = false;
+        return $tourOperator;
+    }
 }

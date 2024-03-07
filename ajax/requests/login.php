@@ -19,7 +19,14 @@ else if(empty($_SESSION['user'])){//Si on apelle le script et qu'on est pas conn
     if(empty($author)){//False si l'author a été trouvé, mais que le mdp ne correspond pas
         $tourOperator = $manager->getTourOperatorConnect($_GET['name'], $_GET['password']);
         if(empty($tourOperator)){
-            echo json_encode(["error" => ["code" => 3, "message" => "Wrong password"]]);
+            $admin = $manager->getAdminConnect($_GET['name'], $_GET['password']);
+            if(empty($admin))
+                echo json_encode(["error" => ["code" => 3, "message" => "Wrong password"]]);
+            else{
+                unset($admin['password']);
+                $_SESSION['user']['admin'] = $admin;
+                echo json_encode(["type" => "admin", "name" => $admin['name']]);
+            }
         }
         else{
             unset($tourOperator['password']);

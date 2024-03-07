@@ -1,5 +1,4 @@
 <?php 
-
 class Destination {
     private int $_id;
     private string $_location;
@@ -20,7 +19,6 @@ class Destination {
             }
         }
     }
-
 
 // SETTER 
     public function setId (int $id)
