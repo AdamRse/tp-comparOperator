@@ -15,12 +15,14 @@ if(openConnect){//Test la présence de la navbar, en cas d'absence le code JS ne
     let divNavMenu =  openConnect.querySelector("#divNavMenu");
     let formConnect = divNavMenu.querySelector("#formConnect");
     let spanReturnMessage = formConnect.querySelector("#spanReturnMessage");
-    let divsLogoutAuthor = openConnect.querySelector("#divLogoutAuthor");
-    let divLogoutTo = openConnect.querySelector("#divLogoutTo");
     let nomSession = openConnect.querySelector("#nomSession");
 
-    divLogoutAuthor.addEventListener("click", logout);
-    divLogoutTo.addEventListener("click", logout);
+    //Log out quand on clique sur la div
+    openConnect.querySelectorAll(".divLogout").forEach(e => {
+        e.addEventListener("click", logout);
+    });
+
+    //Toggle du menu de la navbar en cliquant su l'icone
     openConnect.querySelectorAll(".iconConnect").forEach(e => {
         if(e.dataset.menuid){
             e.addEventListener('click', function(){
@@ -29,7 +31,11 @@ if(openConnect){//Test la présence de la navbar, en cas d'absence le code JS ne
         }
     });
 
+    //Envoi du formulaire de connexion
     formConnect.addEventListener("submit", formSubmit);
+
+
+    //Fonctions spécifiques à la navbar
     function formSubmit(e){
         e.preventDefault();
         let name = formConnect.querySelector('#formConnectName').value;
@@ -60,35 +66,35 @@ if(openConnect){//Test la présence de la navbar, en cas d'absence le code JS ne
             }
         });
     }
-}
-function toggleMenuNavbar(idDivMenuShow){
-    if(divNavMenu.classList.contains("d-none")){
-        for (const child of divNavMenu.children) {
-            if(child.id == idDivMenuShow)
-                child.classList.remove("d-none");
-            else
-                child.classList.add("d-none");
+    function toggleMenuNavbar(idDivMenuShow){
+        if(divNavMenu.classList.contains("d-none")){
+            for (const child of divNavMenu.children) {
+                if(child.id == idDivMenuShow)
+                    child.classList.remove("d-none");
+                else
+                    child.classList.add("d-none");
+            }
+            divNavMenu.classList.remove("d-none");
         }
-        divNavMenu.classList.remove("d-none");
-    }
-    else
-        divNavMenu.classList.add("d-none");
-}
-function logout(){
-    getFetch("login", "dc").then(response => {
-        if(response){
+        else
             divNavMenu.classList.add("d-none");
-            nomSession.innerHTML = "Guest";
-            openConnect.querySelectorAll(".iconConnect").forEach(e => {
-                if(e.dataset.type){
-                    if(e.dataset.type == "guest"){
-                        e.classList.remove("d-none");
+    }
+    function logout(){
+        getFetch("login", "dc").then(response => {
+            if(response){
+                divNavMenu.classList.add("d-none");
+                nomSession.innerHTML = "Guest";
+                openConnect.querySelectorAll(".iconConnect").forEach(e => {
+                    if(e.dataset.type){
+                        if(e.dataset.type == "guest"){
+                            e.classList.remove("d-none");
+                        }
+                        else{
+                            e.classList.add("d-none");
+                        }
                     }
-                    else{
-                        e.classList.add("d-none");
-                    }
-                }
-            });
-        }
-    })
+                });
+            }
+        })
+    }
 }
