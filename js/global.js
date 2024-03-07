@@ -1,5 +1,5 @@
 //Fonctions
-async function getFetch(script, rq = false){
+export async function getFetch(script, rq = false){
     if(rq){
         rq = rq[0]!="&" ? "&"+rq : "";
     }
