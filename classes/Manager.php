@@ -94,6 +94,16 @@ class Manager {
                 return false; 
     }
 
+    // DELETE 
+
+    public function deleteTourOperator($id)
+    {
+        $rqDelDestination = $this->_db->prepare("DETETE FROM destination WHERE tour_operator_id = ?");
+        $rqDelTo = $this->_db->prepare("DETETE FROM tour_operator WHERE id = ?");
+
+        return $rqDelDestination->execute([$id]) && $rqDelTo->execute([$id]);
+    }
+
     // USERS
     public function getAuthorConnect($name, $pw)
     {
