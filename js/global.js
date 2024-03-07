@@ -14,8 +14,10 @@ let openConnect = document.querySelector("#openConnect");
 if(openConnect){//Test la présence de la navbar, en cas d'absence le code JS ne plante pas et le reste peut s'executer.
     let divNavMenu =  openConnect.querySelector("#divNavMenu");
     let formConnect = divNavMenu.querySelector("#formConnect");
+    let spanReturnMessage = formConnect.querySelector("#spanReturnMessage");
     let divsLogoutAuthor = openConnect.querySelector("#divLogoutAuthor");
     let divLogoutTo = openConnect.querySelector("#divLogoutTo");
+    let nomSession = openConnect.querySelector("#nomSession");
 
     divLogoutAuthor.addEventListener("click", logout);
     divLogoutTo.addEventListener("click", logout);
@@ -28,26 +30,34 @@ if(openConnect){//Test la présence de la navbar, en cas d'absence le code JS ne
     });
 
     formConnect.addEventListener("submit", formSubmit);
-    
     function formSubmit(e){
         e.preventDefault();
-        const formData = new FormData(e.target);
-        
-        fetch("/ajax/index.php?script=login", {
-            method: "POST",
-            body: formData,
-            headers: {
-                "Accept": "application/json",
-            },
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`An error occurred: ${response.statusText}`);
+        let name = formConnect.querySelector('#formConnectName').value;
+        let pw = formConnect.querySelector('#formConnectPw').value;
+        getFetch("login", "name="+name+"&password="+pw).then((response) => {
+            console.log(response);
+            if(response.error){
+                spanReturnMessage.innerHTML = response.error.message;
+                setTimeout(() => {
+                    spanReturnMessage.innerHTML = "";
+                }, 4000);
             }
-            console.log(response.json());
-        })
-        .catch(error => {
-            console.log(error);
+            else{
+                divNavMenu.classList.add("d-none");
+                formConnect.querySelector('#formConnectName').value = "";
+                formConnect.querySelector('#formConnectPw').value = "";
+                nomSession.innerHTML = response.name;
+                openConnect.querySelectorAll(".iconConnect").forEach(e => {
+                    if(e.dataset.type){
+                        if(e.dataset.type == response.type){
+                            e.classList.remove("d-none");
+                        }
+                        else{
+                            e.classList.add("d-none");
+                        }
+                    }
+                });
+            }
         });
     }
 }
@@ -66,6 +76,19 @@ function toggleMenuNavbar(idDivMenuShow){
 }
 function logout(){
     getFetch("login", "dc").then(response => {
-        
+        if(response){
+            divNavMenu.classList.add("d-none");
+            nomSession.innerHTML = "Guest";
+            openConnect.querySelectorAll(".iconConnect").forEach(e => {
+                if(e.dataset.type){
+                    if(e.dataset.type == "guest"){
+                        e.classList.remove("d-none");
+                    }
+                    else{
+                        e.classList.add("d-none");
+                    }
+                }
+            });
+        }
     })
 }
