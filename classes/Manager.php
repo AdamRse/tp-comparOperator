@@ -12,7 +12,7 @@ class Manager {
 // GETTER ALL
     public function getAllDestination() 
     {
-        $preparedrequest = $this->_db->query("SELECT * FROM `destination`");
+        $preparedrequest = $this->_db->query("SELECT d.*, p.name, p.description, p.image FROM `destination` d LEFT JOIN planet p ON d.planet_id = p.id;");
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -21,13 +21,18 @@ class Manager {
         $preparedrequest = $this->_db->query("SELECT * FROM `tour_operator`");
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllPlanets()
+    {
+        $preparedrequest = $this->_db->query("SELECT * FROM planet;");
+        return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 // GETTER BY ID
 
-    public function getOperatorByDestination(int $tour_operator_id) 
+    public function getOperatorByDestination($destination_Id) 
     {
-        $preparedrequest = $this->_db->prepare("SELECT * FROM `destination` WHERE tour_operator_id = ?");
-        $preparedrequest->execute([$tour_operator_id]);
+        $preparedrequest = $this->_db->prepare("SELECT d.price, t.name, t.link FROM `destination` d LEFT JOIN tour_operator t ON d.tour_operator_id = t.id WHERE d.tour_operator_id = ");
+        $preparedrequest->execute([$destination_Id]);
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
 
