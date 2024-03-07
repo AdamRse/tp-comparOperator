@@ -10,7 +10,7 @@ class TourOperator {
     private array $_scores = [];
 
 // CONSTRUCT
-    public function __construct (array $data) 
+    public function __construct (array $data = []) 
     {
         $this->hydrate($data);
     }

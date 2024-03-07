@@ -49,6 +49,9 @@ else{
                 </div>
                 <div id="divMenuAdmin" class="d-none">
                     Menu Admin
+                    <div class="my-3">
+                        <a href="?s=admin">Administration interface</a>
+                    </div>
                     <div id="divLogoutAdmin" class="divLogout"  style="cursor: pointer">Log out</div>
                 </div>
             </div>
