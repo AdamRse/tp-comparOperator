@@ -21,8 +21,9 @@ let canvas, renderer, camera, orbit, baseComposer, bloomComposer, overlayCompose
 
 export let scene
 
+let trigger = false
 const btn = document.querySelector(".btn")
-
+let speedGalaxy = 0.002
 // test click object var
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2()
@@ -53,7 +54,7 @@ function initThree() {
     orbit.minDistance = 1;
     orbit.maxDistance = 16384;
     orbit.maxPolarAngle = (Math.PI / 2) - (Math.PI / 360)
-
+    orbit.enableZoom = false
     initRenderPipeline()
 
 }
@@ -125,7 +126,11 @@ function resizeRendererToDisplaySize(renderer) {
 }
 
 async function render() {
-
+    galaxy.scene.rotation.z += speedGalaxy
+    if(trigger){
+        animation()
+    }
+    
     orbit.update()
 
     // fix buffer size
@@ -187,14 +192,7 @@ sphere.name ="sphere"
  console.log(sphere)
 scene.add( sphere );
 
-window.addEventListener("click", function(e){
-    pointer.x = ( e.clientX / window.innerWidth ) ;
-	pointer.y = - ( e.clientY / window.innerHeight ) ;
-    raycaster.setFromCamera( pointer, camera );
-    const intersects = raycaster.intersectObjects( circle );
 
-    console.log(intersects)
-})
 function planet(){
     const geometry = new THREE.SphereGeometry( 15, 32, 16 ); 
     const map = new THREE.TextureLoader().load( 'resources/Gaseous1.png' );
@@ -209,14 +207,26 @@ function planet(){
 }
 
 
-const geometry2 = new THREE.CircleGeometry( 50, 32 ); 
-const material2 = new THREE.MeshBasicMaterial( { color: 0xFF5733, transparent:false,opacity:1,side:THREE.DoubleSide } ); 
-const circle = new THREE.Mesh( geometry2, material2 ); scene.add( circle );
-circle.position.z = 15
-circle.position.x = 210
-scene.add(circle)
-
-console.log(galaxy)
 
 
+console.log(galaxy.scene.position)
 
+
+    let travel = document.querySelector(".travel")
+    travel.addEventListener("click", function(e){
+    
+        trigger = true
+        
+        console.log(camera)
+
+    })
+
+function animation(){
+         speedGalaxy = 0.05
+        galaxy.scene.rotation.x -= 0.001
+        galaxy.scene.position.y += 11
+        galaxy.scene.position.z += 11
+        setTimeout(() => {
+            window.location.href = "http://comparoperator.dvl.to/?s=main"
+        }, 3000);
+}

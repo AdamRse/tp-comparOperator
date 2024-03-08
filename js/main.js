@@ -18,12 +18,15 @@ import { Galaxy } from '/js/threejs/objects/galaxy.js';
 import { Star } from '/js/threejs/objects/star.js';
 import {FlyControls} from 'three/addons/controls/FlyControls.js';
 
+
+let BackDescription = document.querySelector(".BackDescription")
 let btnListe = document.querySelector(".btnListe")
 let baseComposer, bloomComposer, overlayComposer
 let scene1, scene2,camera2, camera1
 let coruscant,Earth,Naboo,mercury;
 let planeteDetail = document.querySelector(".planeteDetail")
 let listeTO = document.querySelector(".listeTO")
+let listeTOs = document.querySelector(".listeTOs")
 let getTo = document.querySelector(".getTO")
 let trigger = false
 let camera, scene, renderer, controls, stats, flyControls;
@@ -330,19 +333,19 @@ function zoom(){
            
             const imgPlanet = document.querySelector(".imgPlanet")
             const descriptionPlanet = document.querySelector(".descriptionPlanet")
-            listeTO.innerHTML =""
+            listeTOs.innerHTML =""
           getData().then((res)=>{
             console.log(res)
                 res.forEach(element => {
                     if (intersection.length > 0 && element.name === intersection[0].object.name) {
                         descriptionPlanet.innerHTML = element.description
                         imgPlanet.src = "/images/planets/" + element.image
-                        listeTO.innerHTML += `
+                        listeTOs.innerHTML += `
                     
                         <a class="link-underline link-underline-opacity-0 d-flex flex-row my-1 card bg-secondary justify-content-center justify-content-between align-items-center ps-3" href="${element.link}" style="width:40vh; height:10vh">
                             <img src="/images/logos/${element.logo_to}" alt="" style="height:40px; width:40px;" class="">
                             <div class="nameTO">${element.name_to}</div>
-                            <div class="prixTO">${element.price}</div>
+                            <div class="prixTO">${element.price}$</div>
                             <div class="likeUsers"></div>
                         </a>
                     
@@ -351,7 +354,7 @@ function zoom(){
                     if(element.name === btnChoicePlanet.mesh.name  && btnClick === true){
                         descriptionPlanet.innerHTML = element.description
                         imgPlanet.src = "/images/planets/" + element.image
-                        listeTO.innerHTML += `
+                        listeTOs.innerHTML += `
                     
                         <a class="link-underline link-underline-opacity-0 d-flex flex-row my-1 card bg-secondary justify-content-center justify-content-between align-items-center ps-3" href="${element.link}" style="width:40vh; height:10vh">
                             <img src="/images/logos/${element.logo_to}" alt="" style="height:40px; width:40px;" class="">
@@ -476,9 +479,9 @@ return tableauPlanet
 getTo.addEventListener("click", function(e){
     planeteDetail.setAttribute('style', 'display:none !important');
     listeTO.setAttribute('style', 'display:flex !important');
-    
 
-    
-    
 })
-
+BackDescription.addEventListener("click", function(e){
+    planeteDetail.setAttribute('style', 'display:flex !important');
+    listeTO.setAttribute('style', 'display:none !important');
+})
