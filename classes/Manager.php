@@ -48,6 +48,15 @@ class Manager {
         }
         return $objAuthors;
     }
+    function getAllReviews(){
+        $request = $this->_db->query("SELECT r.id, r.message, a.name as author FROM review r LEFT JOIN author a ON r.author_id = a.id");
+        $bddReviews = $request->fetchAll(PDO::FETCH_ASSOC);
+        $objReviews = [];
+        foreach ($bddReviews as $review){
+            $objReviews[] = new Review($review);
+        }
+        return $objReviews;
+    }
 
 // GETTER BY ID
 
@@ -68,22 +77,20 @@ class Manager {
         $preparedrequest->execute([$destination_Id]);
         return $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public function getReviewByTourOperator(int $tour_operator_id) 
     {
         $preparedrequest = $this->_db->prepare("SELECT r.id, r.message, a.name as author FROM `review` r LEFT JOIN author a ON r.author_id = a.id WHERE r.tour_operator_id = ?");
         $preparedrequest->execute([$tour_operator_id]);
         $bddReviews = $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
         $objReviews = [];
-        foreach ($bddReviews as $review) {
+        foreach ($bddReviews as $review){
             $objReviews[] = new Review($review);
         }
         return $objReviews;
     }
-
     public function getReviewByAuthor(int $author_id) 
     {
-        $preparedrequest = $this->_db->prepare("SELECT r.id, r.message, t.name as tourOperator FROM `review` r LEFT JOIN tour_operator t ON r.tour_operator = t.id WHERE r.author = ?");
+        $preparedrequest = $this->_db->prepare("SELECT r.id, r.message, a.name as author FROM `review` r LEFT JOIN author a ON r.author_id = a.id WHERE r.author_id = ?");
         $preparedrequest->execute([$author_id]);
         $bddReviews = $preparedrequest->fetchAll(PDO::FETCH_ASSOC);
         $objReviews = [];
@@ -122,6 +129,14 @@ class Manager {
         }
         return $objDestinations;
     }
+// UPDATE
+
+    public function updatePasswordTo($idTo, $newPw)
+    {
+        $preparedRequest = $this->_db->prepare("UPDATE tour_operator SET password = :pw WHERE id = :id");
+        return $preparedRequest->execute(["pw" => password_hash($newPw, PASSWORD_DEFAULT), "id" => $idTo]);
+    }
+
 
 // CREATE 
 
@@ -162,6 +177,18 @@ class Manager {
         $rqDelTo = $this->_db->prepare("DELETE FROM tour_operator WHERE id = ?");
 
         return $rqDelDestination->execute([$id]) && $rqDelTo->execute([$id]);
+    }
+    public function deleteAuthor($id)
+    {
+        $rqDelReviews = $this->_db->prepare("DELETE FROM review WHERE author_id = ?");
+        $rqDelAuthor = $this->_db->prepare("DELETE FROM author WHERE id = ?");
+
+        return $rqDelReviews->execute([$id]) && $rqDelAuthor->execute([$id]);
+    }
+    public function deleteReview($id)
+    {
+        $rqDelReviews = $this->_db->prepare("DELETE FROM review WHERE id = ?");
+        return $rqDelReviews->execute([$id]);
     }
 
     // USERS

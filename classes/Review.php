@@ -28,12 +28,12 @@ class Review {
         $this->_id = $id;
     }
 
-    public function setMessage (string $message)
+    public function setMessage ($message)
     {
         $this->_message = $message;
     }
 
-    public function setAuthor (string $author)
+    public function setAuthor($author)
     {
         $this->_author = $author;
     }

@@ -15,6 +15,7 @@ $operators = $manager->getAllOperator();
       <th scope="col">Scores</th>
       <th scope="col">Options</th>
     </tr>
+</thead>
     <?php
     foreach ($operators as $operator){
         ?>
@@ -38,7 +39,6 @@ $operators = $manager->getAllOperator();
         <?php
     }
     ?>
-</thead>
 </table>
 <h2 class="text-center mt-4">Add a tour Operator</h2>
 <div class="d-flex justify-content-center">
