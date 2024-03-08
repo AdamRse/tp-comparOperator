@@ -1,0 +1,26 @@
+# .htaccess ne  peut pas fonctionner car devilbox utilise nginx et pas apache2
+
+# AllowOverride All
+# Options All
+
+# RewriteEngine on
+# RewriteBase /
+
+# Order allow,deny
+# Allow from all
+# Require all granted
+
+# RewriteRule ^/([^\/\\]+)/?$ /?s=$1 [L]
+# RewriteRule ^/destination/([^\/\\]+)/?$ /?s=destination&destination=$1 [L]
+# RewriteRule ^/destination/([^\/\\]+)/([^\/\\]+)/?$ /?s=destination&destination=$1&tourOperator=$2 [L]
+
+# version nginx dans nginx.yml
+# server {
+#     # ...
+#     rewrite ^/([^\/\\]+)/?$ /?s=$1 last;
+#     rewrite ^/destination/([^\/\\]+)/?$ /?s=destination&destination=$1 last;
+#     rewrite ^/destination/([^\/\\]+)/([^\/\\]+)/?$ /?s=destination&destination=$1&tourOperator=$2 last;
+
+#     return  403;
+#     # ...
+# }
